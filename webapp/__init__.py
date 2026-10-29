@@ -7,7 +7,6 @@ from flask import Flask, jsonify, request
 from werkzeug.exceptions import HTTPException
 
 from config import DEFAULT_DB_PATH, load_dotenv_file
-
 from . import db
 from .services import Services
 
@@ -19,7 +18,10 @@ def create_app(test_config: dict | None = None) -> Flask:
     load_dotenv_file()
     app = Flask(__name__)
     app.config.update(
-        DB_PATH=str(os.environ.get("DB_PATH") or DEFAULT_DB_PATH),
+       DB_PATH=str(
+    os.environ.get("DB_PATH")
+    or ("/tmp/app.db" if os.environ.get("VERCEL") else DEFAULT_DB_PATH)
+),
         MAX_CONTENT_LENGTH=4 * 1024 * 1024,
         MAX_TEXT_LENGTH=5000,
         MAX_CHAT_LENGTH=2000,
