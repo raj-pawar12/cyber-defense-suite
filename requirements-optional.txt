@@ -1,0 +1,2 @@
+# Enables QR-code scanning on the Message checker page
+opencv-python-headless>=4.8

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Message checker - Cyber Defense Suite{% endblock %}
+{% block content %}
+  <section class="hero">
+    <h1>Is this email or SMS a scam?</h1>
+    <p class="lede">Paste the text of a message. The checker reads the wording, then scores every link inside it with the URL engine. You can also scan a QR code from a picture.</p>
+  </section>
+
+  <div class="card">
+    <label class="field" for="msg-input">Message text</label>
+    <textarea id="msg-input" spellcheck="false" placeholder="Paste an email or SMS here..."></textarea>
+    <div class="examples">Try an example:
+      <button class="chip" type="button" data-text="Dear Customer, your SBI account has been suspended. Verify your KYC within 24 hours to avoid permanent closure: http://sbi-kyc-update.top/login">Fake bank SMS</button>
+      <button class="chip" type="button" data-text="Congratulations! You have won Rs 25000 in the lucky draw. Claim your prize now: https://bit.ly/3xYz9aB">Prize scam</button>
+      <button class="chip" type="button" data-text="123456 is your OTP for HDFC Bank. It is valid for 10 minutes. Do not share it with anyone.">Real OTP</button>
+      <button class="chip" type="button" data-text="Hi Rahul, reminder: project review on Monday at 4 PM. The agenda is in the calendar invite.">Meeting note</button>
+    </div>
+    <div class="row mt-16">
+      <button id="msg-check" class="btn primary" type="button">Check message</button>
+      <label class="btn" for="qr-file">Scan a QR image</label>
+      <input id="qr-file" class="sr-file" type="file" accept="image/*">
+    </div>
+    <p class="hint">Messages are scored on the server but their text is not stored. QR scanning needs the optional OpenCV package.</p>
+    <p id="msg-error" class="error" role="alert"></p>
+  </div>
+  <div id="msg-result" aria-live="polite"></div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/message.js') }}"></script>{% endblock %}

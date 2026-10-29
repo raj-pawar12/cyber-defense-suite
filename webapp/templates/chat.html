@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Cyber assistant - Cyber Defense Suite{% endblock %}
+{% block content %}
+  <section class="hero">
+    <h1>Ask the cybersecurity assistant.</h1>
+    <p class="lede">Questions about phishing, passwords, malware, online fraud, safe browsing, secure coding or starting a career in security. Paste a link and I will check it for you.</p>
+    <span id="ai-status" class="badge-status">Checking AI status...</span>
+  </section>
+
+  <div class="card chat-card">
+    <div id="messages" class="messages" role="log" aria-live="polite" aria-label="Conversation"></div>
+    <div id="suggestions" class="suggestions">
+      <button class="chip" type="button">How do I spot a phishing email?</button>
+      <button class="chip" type="button">What should I do if I clicked a suspicious link?</button>
+      <button class="chip" type="button">How do I make a strong password?</button>
+      <button class="chip" type="button">Who do I call for online fraud in India?</button>
+      <button class="chip" type="button">How do I start a career in cybersecurity?</button>
+    </div>
+    <div class="chat-input">
+      <label class="sr-file" for="chat-text">Your question</label>
+      <textarea id="chat-text" rows="1" maxlength="2000" placeholder="Type your question..."></textarea>
+      <button id="chat-send" class="btn primary" type="button">Send</button>
+    </div>
+  </div>
+  <div class="chat-tools">
+    <p id="chat-error" class="error" role="alert"></p>
+    <button id="chat-clear" class="btn small" type="button">Clear chat</button>
+  </div>
+  <p class="hint">The assistant can make mistakes. For urgent fraud, call your bank and the national cybercrime helpline 1930 straight away. When an API key is configured, your questions are sent to Google's Gemini service, so never type passwords, OTPs or other secrets here.</p>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/chat.js') }}"></script>{% endblock %}

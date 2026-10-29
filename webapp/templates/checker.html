@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Link checker - Cyber Defense Suite{% endblock %}
+{% block content %}
+  <section class="hero">
+    <h1>Check a link before you click it.</h1>
+    <p class="lede">Paste a web address and get an estimate of how likely it is to be phishing, with the reasons in plain English. Only the text of the link is analysed. Nothing is opened or downloaded.</p>
+  </section>
+
+  <div class="tabs" role="tablist" aria-label="Link checker tools">
+    <button class="tab" role="tab" id="tab-single" aria-controls="panel-single" aria-selected="true">Check one link</button>
+    <button class="tab" role="tab" id="tab-bulk" aria-controls="panel-bulk" aria-selected="false" tabindex="-1">Check many links</button>
+  </div>
+
+  <section id="panel-single" role="tabpanel" aria-labelledby="tab-single">
+    <div class="card">
+      <label class="field" for="url">Web address</label>
+      <div class="row">
+        <input id="url" class="mono" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://example.com/login">
+        <button id="paste" class="btn" type="button" hidden>Paste</button>
+        <button id="check" class="btn primary" type="button">Check link</button>
+      </div>
+      <div class="examples">Try an example:
+        <button class="chip" type="button" data-url="https://www.wikipedia.org/wiki/Phishing">Safe site</button>
+        <button class="chip" type="button" data-url="http://paypa1-secure-login.xyz/verify/account.php?session=9f3a1c">Fake PayPal</button>
+        <button class="chip" type="button" data-url="https://www.google.com@login-update.tk/">@ trick</button>
+        <button class="chip" type="button" data-url="http://192.168.44.12:8080/amazon/signin.php">IP address</button>
+      </div>
+      <p id="error" class="error" role="alert"></p>
+    </div>
+    <div id="result" aria-live="polite"></div>
+    <section class="history" id="history" hidden>
+      <div class="history-head"><h3 class="m-0">Recent checks</h3><button class="btn small" id="clear-history" type="button">Clear</button></div>
+      <ul id="history-list"></ul>
+    </section>
+  </section>
+
+  <section id="panel-bulk" role="tabpanel" aria-labelledby="tab-bulk" hidden>
+    <div class="card">
+      <label class="field" for="bulk-input">One link per line (up to 25)</label>
+      <textarea id="bulk-input" class="mono" spellcheck="false" placeholder="https://www.wikipedia.org&#10;http://paypa1-secure-login.xyz/verify.php&#10;http://192.168.44.12:8080/amazon/signin.php"></textarea>
+      <div class="row mt-12">
+        <button id="bulk-run" class="btn primary" type="button">Check all</button>
+        <button id="bulk-csv" class="btn" type="button" hidden>Download CSV</button>
+      </div>
+      <p id="bulk-error" class="error" role="alert"></p>
+      <div id="bulk-summary" class="summary" aria-live="polite"></div>
+      <div class="table-wrap" id="bulk-table" hidden>
+        <table>
+          <thead><tr><th>Verdict</th><th>Phishing chance</th><th>Link</th></tr></thead>
+          <tbody id="bulk-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="tips">
+    <h2>How to spot a fake link yourself</h2>
+    <div class="tip-grid">
+      <div class="tip"><b>Read the real domain</b><span>The site is the part just before the first single slash. "paypal.com.verify-now.xyz" belongs to verify-now.xyz.</span></div>
+      <div class="tip"><b>Watch for look-alikes</b><span>Swapped letters and numbers, like paypa1 or amaz0n, are a classic trick.</span></div>
+      <div class="tip"><b>Ignore the padlock</b><span>HTTPS only means the connection is encrypted. Scammers use it too.</span></div>
+      <div class="tip"><b>Go there directly</b><span>If a message says your account is in trouble, type the official address yourself.</span></div>
+    </div>
+  </section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/checker.js') }}"></script>{% endblock %}

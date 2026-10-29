@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Performance - Cyber Defense Suite{% endblock %}
+{% block content %}
+  <section class="hero">
+    <h1>How well does it work?</h1>
+    <p class="lede">Measured results for the two detectors on unseen test data, plus how the site has been used.</p>
+  </section>
+  <div id="usage" class="stats" aria-label="Usage statistics"></div>
+  <div id="module-url" class="module-block"><p class="hint">Loading...</p></div>
+  <div id="module-message" class="module-block"><p class="hint">Loading...</p></div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/performance.js') }}"></script>{% endblock %}

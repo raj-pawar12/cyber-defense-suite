@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Cyber Defense Suite{% endblock %}</title>
+<meta name="description" content="Check links, emails and SMS for phishing, and ask a cybersecurity assistant. Only text is analysed; nothing is opened.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231e3a8a' d='M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="{{ url_for('pages.checker') }}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Cyber Defense Suite</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="{{ url_for('pages.checker') }}"{% if active == 'checker' %} aria-current="page"{% endif %}>Link checker</a>
+      <a href="{{ url_for('pages.message') }}"{% if active == 'message' %} aria-current="page"{% endif %}>Message checker</a>
+      <a href="{{ url_for('pages.chat') }}"{% if active == 'chat' %} aria-current="page"{% endif %}>Cyber assistant</a>
+      <a href="{{ url_for('pages.performance') }}"{% if active == 'performance' %} aria-current="page"{% endif %}>Performance</a>
+    </nav>
+    <div class="bar-right">
+      <a class="link" href="https://github.com/raj-pawar12" target="_blank" rel="noopener">GitHub</a>
+      <button class="btn" id="theme" type="button">Dark mode</button>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+{% block content %}{% endblock %}
+  <footer>Cyber Defense Suite is a learning project. The detectors judge how a link or message looks, not the page behind it, and results are estimates, not guarantees. Never enter a password or OTP on a link you did not expect.</footer>
+</main>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
